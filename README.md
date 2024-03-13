@@ -13,13 +13,7 @@ I made this because I didn't want any libs like PHP, NPM, etc. installed on the 
 * node container to build react-app
 * composer container to build php project
 
-### [make] command install on windows (optional, you can use original docker command to build/run image)
-You can follow instruction from this blog
-```
-https://medium.com/@samsorrahman/how-to-run-a-makefile-in-windows-b4d115d7c516
-```
-
-### Makefile [make] commands sample
+### Makefile [make] commands sample (you can use docker commands instead)
 create image
 ```
 make build-image image_name=IMAGE_NAME version=IMAGE_VERSION file=DOCKER_FILE_PATH
