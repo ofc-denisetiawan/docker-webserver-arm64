@@ -56,11 +56,11 @@ RUN docker-php-ext-install mcrypt
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Setup oci8 and pdo_oci
-ENV LD_LIBRARY_PATH="/opt/oracle/instantclient_19_9"
-ENV ORACLE_HOME="/opt/oracle/instantclient_19_9"
-ENV OCI_HOME="/opt/oracle/instantclient_19_9"
-ENV OCI_LIB_DIR="/opt/oracle/instantclient_19_9"
-ENV OCI_INCLUDE_DIR="/opt/oracle/instantclient_19_9/sdk/include"
+ENV LD_LIBRARY_PATH="/opt/oracle/instantclient_19_19"
+ENV ORACLE_HOME="/opt/oracle/instantclient_19_19"
+ENV OCI_HOME="/opt/oracle/instantclient_19_19"
+ENV OCI_LIB_DIR="/opt/oracle/instantclient_19_19"
+ENV OCI_INCLUDE_DIR="/opt/oracle/instantclient_19_19/sdk/include"
 ENV OCI_VERSION=19
 
 # Oracle instantclient
@@ -69,11 +69,11 @@ ADD libs/oracle/instantclient-basic-linux-arm64.zip /opt/oracle
 ADD libs/oracle/instantclient-sdk-linux-arm64.zip /opt/oracle
 RUN cd /opt/oracle && unzip instantclient-basic-linux-arm64.zip -d /opt/oracle \
     && unzip instantclient-sdk-linux-arm64.zip -d /opt/oracle \
-    && echo /opt/oracle/instantclient_19_9 > /etc/ld.so.conf.d/oracle-instantclient.conf \
+    && echo /opt/oracle/instantclient_19_19 > /etc/ld.so.conf.d/oracle-instantclient.conf \
     && ldconfig
 
 # install oci8
-RUN echo 'instantclient,/opt/oracle/instantclient_19_9' | pecl install oci8-2.2.0 \
+RUN echo 'instantclient,/opt/oracle/instantclient_19_19' | pecl install oci8-2.2.0 \
     && echo "extension=oci8.so" >> /usr/local/etc/php/conf.d/oci8.ini
 
 # install APCu
@@ -133,7 +133,7 @@ RUN yes "" | pecl install msgpack-beta \
 RUN export CFLAGS="-I/usr/src/php" && \
     docker-php-ext-install xmlreader xmlwriter
 
-RUN docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/instantclient_19_9,19.1 && \
+RUN docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/instantclient_19_19,19.19 && \
     echo "extension=pdo_oci.so" > /usr/local/etc/php/conf.d/pdo_oci.ini
 
 RUN docker-php-ext-install \
